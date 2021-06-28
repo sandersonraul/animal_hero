@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2020_09_27_041742) do
     t.string "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_ongs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
