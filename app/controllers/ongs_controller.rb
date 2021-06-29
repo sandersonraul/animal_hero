@@ -29,7 +29,8 @@ class OngsController < ApplicationController
   # POST /ongs.json
   def create
     @ong = Ong.new(ong_params)
-
+    @ong.user_id = current_user.id
+    
     respond_to do |format|
       if @ong.save
         format.html { redirect_to @ong, notice: 'Ong criada com sucesso' }
