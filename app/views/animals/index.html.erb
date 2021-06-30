@@ -1,6 +1,18 @@
+<%= form_tag(animals_path, method: 'get') do %>
+  <div class="row">
+    <%= label_tag "Nome do Animal: "%>
+    <%= select_tag :id, options_from_collection_for_select(Animal.all.order(:nome),"id","nome"),include_blank: 'Selecione' %>
+    <%= label_tag "Situação: "%>
+    <%= select_tag :situacao, options_for_select(['Abandonado', 'Propriedade']),  {include_blank:"Selecione..."}%>
+    <%= button_tag(value: "commit", type: 'submit', class: "btn btn-primary") do%>
+      buscar
+    <%end %>
+  </div>
+<%end %>
 <p id="notice"><%= notice %></p>
 
 <h1>Animals</h1>
+
 
 <table class="table">
   <thead>

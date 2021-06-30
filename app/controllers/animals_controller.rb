@@ -5,7 +5,15 @@ class AnimalsController < ApplicationController
   # GET /animals
   # GET /animals.json
   def index
-    @animals = Animal.all
+    @ong = Ong.where(user_id: session[:user_id])
+    if params[:id].nil?
+      @animals = Animal.all
+    elsif params[:situacao].present?
+      @animals = Animal.where(situacao: params[:situacao])
+    else
+      @animals = Animal.where(id: params[:id])
+    end
+
   end
 
   # GET /animals/1
