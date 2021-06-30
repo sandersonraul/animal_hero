@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  raca: MyString
+  especie: MyString
+  sexo: MyString
+  peso: 1.5
+  data_nascimento: MyString
+  situacao: MyString
+  ong: one
+
+two:
+  nome: MyString
+  raca: MyString
+  especie: MyString
+  sexo: MyString
+  peso: 1.5
+  data_nascimento: MyString
+  situacao: MyString
+  ong: two
