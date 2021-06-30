@@ -10,14 +10,19 @@
       <%= form.text_field :email, class:"form-control"%>
     </div>
   
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <%= form.label :estado %>
       <%= form.text_field :estado, class:"form-control"%>
     </div>
 
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <%= form.label :logo %>
       <%= form.text_field :logo, class:"form-control"%>
+    </div>
+
+    <div class="form-group col-md-4">
+      <%= form.label :user_id %>
+      <%= form.select("user_id", @user_options, {include_blank: 'Selecione'}, class:"form-control" ) %>
     </div>
 
     <div class="actions btn">

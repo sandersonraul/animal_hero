@@ -1,13 +1,14 @@
 class OngsController < ApplicationController
   before_action :set_ong, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_options, only: [:new, :create, :edit, :update]
 
   # GET /ongs
   # GET /ongs.json
   def index
     if params[:id].nil?
-      @ongs = Ong.all
+      @ongs = Ong.where(user_id: current_user.id)
     else
-      @ongs = Ong.where(id: params[:id])
+      @ongs = Ong.where(id: params[:id], user_id: current_user.id)
     end
   end
 
@@ -67,6 +68,9 @@ class OngsController < ApplicationController
   end
 
   private
+    def set_user_options
+      @user_options = User.all.pluck(:name, :id)
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_ong
       @ong = Ong.find(params[:id])
@@ -74,6 +78,6 @@ class OngsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ong_params
-      params.require(:ong).permit(:nome, :email, :estado, :logo)
+      params.require(:ong).permit(:nome, :email, :estado, :logo, :user_id)
     end
 end
