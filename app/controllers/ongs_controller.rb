@@ -5,11 +5,15 @@ class OngsController < ApplicationController
   # GET /ongs
   # GET /ongs.json
   def index
-    if params[:id].nil?
-      @ongs = Ong.where(user_id: session[:user_id])
-    else
-      @ongs = Ong.where(id: params[:id], user_id: current_user.id)
-    end
+    if user_signed_in?
+      if params[:id].nil?
+          @ongs = Ong.where(user_id: session[:user_id])
+        else
+          @ongs = Ong.where(id: params[:id], user_id: current_user.id)
+        end
+      else
+        return redirect_to entrar_path, notice:'É necessário fazer login para acessar essa página.'
+      end
   end
 
   # GET /ongs/1
