@@ -6,7 +6,7 @@ class OngsController < ApplicationController
   # GET /ongs.json
   def index
     if params[:id].nil?
-      @ongs = Ong.where(user_id: current_user.id)
+      @ongs = Ong.where(user_id: session[:user_id])
     else
       @ongs = Ong.where(id: params[:id], user_id: current_user.id)
     end

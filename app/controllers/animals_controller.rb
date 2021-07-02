@@ -5,12 +5,17 @@ class AnimalsController < ApplicationController
   # GET /animals
   # GET /animals.json
   def index
-    if params[:id].nil?
-      @animals = Animal.all.where(ong_id: current_user.ong_ids)
-    elsif params[:situacao].present?
-      @animals = Animal.where(situacao: params[:situacao], ong_id: current_user.ong_ids)
+    
+    if user_signed_in?
+      if params[:id].nil?
+        @animals = Animal.all.where(ong_id: current_user.ong_ids)
+      elsif params[:situacao].present?
+        @animals = Animal.where(situacao: params[:situacao], ong_id: current_user.ong_ids)
+      else
+        @animals = Animal.where(id: params[:id], ong_id: current_user.ong_ids)
+      end
     else
-      @animals = Animal.where(id: params[:id], ong_id: current_user.ong_ids)
+      return redirect_to entrar_path, notice:'É necessário fazer login para acessar essa página.'
     end
 
   end
@@ -71,7 +76,7 @@ class AnimalsController < ApplicationController
 
   private
     def set_ong_options
-      @ong_options = Ong.all.pluck(:id, :id)
+      @ong_options = Ong.where(user_id: session[:user_id]).pluck(:nome, :id)
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_animal
